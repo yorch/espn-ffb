@@ -55,3 +55,11 @@ sudo dpkg -i build/distributions/espn-ffb*.deb
 The `.deb` package includes two `.service` files:
 *  `espn-ffb.service`: Starts espn-ffb Flask app
 *  `espn-ffb-update.service`: Updates espn-ffb database
+
+## Recaps:
+Sample recap [template files](espn_ffb/templates/recap/2018/2) as an example of how to structure written recaps. 
+
+### Generate a new blank recap template:
+```
+python3 -m espn_ffb.scripts.generate_recap -e {dev|prod} -y {year} -w {week}`
+```
