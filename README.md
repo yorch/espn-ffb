@@ -61,5 +61,5 @@ Sample recap [template files](espn_ffb/templates/recap/2018/2) as an example of 
 
 ### Generate a new blank recap template:
 ```
-python3 -m espn_ffb.scripts.generate_recap -e {dev|prod} -y {year} -w {week}`
+python3 -m espn_ffb.scripts.generate_recap -e {dev|prod} -y {year} -w {week}
 ```
