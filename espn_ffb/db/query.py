@@ -188,7 +188,7 @@ class Query:
             when (r.wins + r.losses) = 0 
               then 0 
             else 
-              round(r.points_for/(r.wins + r.losses), 2) 
+              round(r.points_against/(r.wins + r.losses), 2) 
           end as avg_points_against,
           (select count(1) from champions where owner_id = r.owner_id and year = r.year) as championships,
           (select count(1) from sackos where owner_id = r.owner_id and year = r.year) as sackos
@@ -238,7 +238,7 @@ class Query:
             when (sum(r.wins) + sum(r.losses)) = 0 
               then 0 
             else 
-              round(sum(r.points_for)/(sum(r.wins) + sum(r.losses)), 2) 
+              round(sum(r.points_against)/(sum(r.wins) + sum(r.losses)), 2) 
           end as avg_points_against,
           (select count(1) from champions where owner_id = r.owner_id) as championships,
           (select count(1) from sackos where owner_id = r.owner_id) as sackos
