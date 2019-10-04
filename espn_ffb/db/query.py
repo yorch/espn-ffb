@@ -170,11 +170,26 @@ class Query:
           r.owner_id as owner_id,
           r.wins as wins,
           r.losses as losses,
-          round(r.wins::decimal/(r.wins + r.losses), 4) as win_percentage,
+          case 
+            when (r.wins + r.losses) = 0 
+              then 0 
+            else 
+              round(r.wins::decimal/(r.wins + r.losses) , 4) 
+          end as win_percentage,
           r.points_for as points_for,
           r.points_against as points_against,
-          round(r.points_for/(r.wins + r.losses), 2) as avg_points_for,
-          round(r.points_for/(r.wins + r.losses), 2) as avg_points_against,
+          case 
+            when (r.wins + r.losses) = 0 
+              then 0 
+            else 
+              round(r.points_for/(r.wins + r.losses), 2) 
+          end as avg_points_for,
+          case 
+            when (r.wins + r.losses) = 0 
+              then 0 
+            else 
+              round(r.points_for/(r.wins + r.losses), 2) 
+          end as avg_points_against,
           (select count(1) from champions where owner_id = r.owner_id and year = r.year) as championships,
           (select count(1) from sackos where owner_id = r.owner_id and year = r.year) as sackos
         from 
@@ -205,11 +220,26 @@ class Query:
           r.owner_id as owner_id,
           sum(r.wins) as wins,
           sum(r.losses) as losses,
-          round(sum(r.wins)::decimal/(sum(r.wins)+sum(r.losses)), 4) as win_percentage,
+          case 
+            when (r.wins + r.losses) = 0 
+              then 0 
+            else 
+              round(r.wins::decimal/(r.wins + r.losses) , 4) 
+          end as win_percentage,
           sum(r.points_for) as points_for,
           sum(r.points_against) as points_against,
-          round(sum(r.points_for)/(sum(r.wins)+sum(r.losses)), 2) as avg_points_for,
-          round(sum(r.points_against)/(sum(r.wins)+sum(r.losses)), 2) as avg_points_against,
+          case 
+            when (r.wins + r.losses) = 0 
+              then 0 
+            else 
+              round(r.points_for/(r.wins + r.losses), 2) 
+          end as avg_points_for,
+          case 
+            when (r.wins + r.losses) = 0 
+              then 0 
+            else 
+              round(r.points_for/(r.wins + r.losses), 2) 
+          end as avg_points_against,
           (select count(1) from champions where owner_id = r.owner_id) as championships,
           (select count(1) from sackos where owner_id = r.owner_id) as sackos
         from
