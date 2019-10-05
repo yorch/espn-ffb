@@ -1,3 +1,20 @@
+import os
+import datetime
+
+"""
+Environment variables:
+- FFB_LEAGUE_ID
+- FFB_YEAR
+- SWID
+- ESPN_S2
+- POSTGRES_USER
+- POSTGRES_PASSWORD
+- POSTGRES_HOST
+- POSTGRES_PORT
+- POSTGRES_DB
+"""
+
+
 def get_db_uri(user, password, host, port, dbname):
     return f"postgresql://{user}:{password}@{host}:{port}/{dbname}"
     # return f"mysql://{user}:{password}@{host}:{port}/{dbname}"
@@ -5,12 +22,12 @@ def get_db_uri(user, password, host, port, dbname):
 
 
 class Config(object):
-    LEAGUE_ID = 123456
-    CURRENT_YEAR = 2019
+    LEAGUE_ID = os.getenv('FFB_LEAGUE_ID')
+    CURRENT_YEAR = os.getenv('FFB_YEAR', datetime.datetime.now().year)
     DB_URI = ""
     COOKIES = {
-        "swid": "{your_swid}",
-        "espn_s2": "your_espn_s2"
+        "swid": os.getenv('SWID'),
+        "espn_s2": os.getenv('ESPN_S2')
     }
 
     log_format = "%(asctime)s %(levelname)s %(pathname)s %(lineno)d: %(message)s"
@@ -35,18 +52,20 @@ class DevConfig(Config):
     log_base_dir = "log"
     # console_level = 10
 
-    DB_URI = get_db_uri(user=user, password=password, host=host, port=port, dbname=dbname)
+    DB_URI = get_db_uri(user=user, password=password,
+                        host=host, port=port, dbname=dbname)
 
 
 class ProdConfig(Config):
-    config_dir = "/etc/opt/espn-ffb"
+    config_dir = os.getenv('CONFIG_DIR', '/etc/espn-ffb')
 
-    user = "your_prod_user"
-    password = "your_prod_pw"
-    host = "localhost"
-    port = "5432"
-    dbname = "your_prod_db"
+    user = os.getenv('POSTGRES_USER')
+    password = os.getenv('POSTGRES_PASSWORD')
+    host = os.getenv('POSTGRES_HOST', 'db')
+    port = os.getenv('POSTGRES_PORT', '5432')
+    dbname = os.getenv('POSTGRES_DB', 'espn-ffb')
 
-    log_base_dir = "/var/log/espn-ffb"
+    log_base_dir = os.getenv('LOG_BASE_DIR', '/var/log/espn-ffb')
 
-    DB_URI = get_db_uri(user=user, password=password, host=host, port=port, dbname=dbname)
+    DB_URI = get_db_uri(user=user, password=password,
+                        host=host, port=port, dbname=dbname)

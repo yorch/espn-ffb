@@ -5,7 +5,7 @@ After=network-online.target
 
 [Service]
 WorkingDirectory=/opt/espn-ffb
-ExecStart=/usr/local/bin/uwsgi --ini /etc/opt/espn-ffb/espn-ffb-prod.ini
+ExecStart=/usr/local/bin/uwsgi --ini /etc/espn-ffb/espn-ffb-prod.ini
 
 [Install]
 WantedBy=default.target
