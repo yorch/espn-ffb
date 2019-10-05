@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        APP_DIR: ${APP_DIR}
+      APP_DIR: ${APP_DIR}
         CONFIG_DIR: ${CONFIG_DIR}
         LOG_BASE_DIR: ${LOG_BASE_DIR}
     volumes:
