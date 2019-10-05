@@ -23,7 +23,7 @@ pip3 install -r requirements.txt
 ## Config:
 
 Edit [config.py](espn_ffb/config.py) with your own:
-*  Enter your database credentials in `DevConfig` and `ProdConfig`.
+*  Database credentials in `DevConfig` and `ProdConfig`.
 *  `LEAGUE_ID`
 *  `swid` (private leagues)
 *  `espn_s2` (private leagues)
