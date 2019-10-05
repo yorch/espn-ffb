@@ -57,7 +57,7 @@ The `.deb` package includes two `.service` files:
 *  `espn-ffb-update.service`: Updates espn-ffb database
 
 ## Recaps:
-Sample recap [template files](espn_ffb/templates/recap/2018/2) as an example of how to structure written recaps. 
+Sample [recap templates](espn_ffb/templates/recap/2018/2) as an example of how to structure written recaps. 
 
 ### Generate a new blank recap template:
 ```
